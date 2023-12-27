@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from "./routes/user.routes.js";
 import authRouter from "./routes/auth.route.js";
-import exp from 'constants';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -16,7 +16,11 @@ mongoose.connect(process.env.MONGO).then(() => {
 
 const app = express();
 
+
+
 app.use(express.json()); // Body parser for JSON payloads
+
+app.use(cookieParser());
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
